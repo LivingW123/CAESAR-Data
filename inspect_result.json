@@ -1,0 +1,103 @@
+{
+  "dimensions": {
+    "Time": 32348,
+    "sps1": 1,
+    "Vector64": 64,
+    "Vector13": 13,
+    "Vector98": 98,
+    "sps10": 10,
+    "Vector30": 30,
+    "sps50": 50,
+    "sps25": 25,
+    "sps100": 100,
+    "sps2": 2,
+    "Vector99": 99,
+    "sps16": 16,
+    "sps8": 8,
+    "sps5": 5,
+    "sps20": 20,
+    "sps13": 13
+  },
+  "variables": {
+    "Time": {
+      "shape": [
+        32348
+      ],
+      "units": "seconds since 2024-02-29 00:00:00 +0000",
+      "long_name": "time of measurement",
+      "min": 34060.0,
+      "max": 66407.0
+    },
+    "PALT": {
+      "shape": [
+        32348
+      ],
+      "units": "m",
+      "long_name": "NACA Pressure Altitude",
+      "min": 540.7002563476562,
+      "max": 6117.81591796875
+    },
+    "GGLON": {
+      "shape": [
+        32348,
+        20
+      ],
+      "units": "degree_E",
+      "long_name": "Reference GPS Longitude",
+      "min": -4.296694278717041,
+      "max": 20.604820251464844
+    },
+    "GGLAT": {
+      "shape": [
+        32348,
+        20
+      ],
+      "units": "degree_N",
+      "long_name": "Reference GPS Latitude",
+      "min": 67.70600891113281,
+      "max": 75.46232604980469
+    },
+    "THETA": {
+      "shape": [
+        32348
+      ],
+      "units": "K",
+      "long_name": "Potential Temperature",
+      "min": 265.2149658203125,
+      "max": 303.31005859375
+    },
+    "VMR_VXL": {
+      "shape": [
+        32348
+      ],
+      "units": "ppmv",
+      "long_name": "Volume Mixing Ratio",
+      "min": 19.24024200439453,
+      "max": 19921.927734375
+    },
+    "dD_WVISO1": {
+      "shape": [
+        32348,
+        5
+      ],
+      "units": "permil",
+      "long_name": "Stable Water Isotope Ratio For Hydrogen",
+      "min": -2940.1552734375,
+      "max": 3712.71337890625
+    }
+  },
+  "time_range": {
+    "min": 34060.0,
+    "max": 66407.0
+  },
+  "spiral_points": 8686,
+  "horiz_points": 2001,
+  "palt_spiral": {
+    "min": 2137.953857421875,
+    "max": 6117.81591796875
+  },
+  "palt_horiz": {
+    "min": 571.8997192382812,
+    "max": 2145.763427734375
+  }
+}
