@@ -3,19 +3,21 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
-def load_first_n_lines(nc_path, n=5):
+def load_first_n_lines(nc_path, start=4471, n=5):
     """
-    Demonstrates loading only the first N rows for rapid testing
+    Demonstrates loading only N rows starting at `start` for rapid testing
     without reading the entire 1.4GB file.
+    Default start=4471 skips initial masked rows where instruments
+    (PALT, THETA, VMR_VXL, dD_WVISO1) have not yet begun recording.
     """
-    print(f"Opening {nc_path} for quick test (first {n} rows)...")
+    print(f"Opening {nc_path} for quick test ({n} rows starting at index {start})...")
     ds = netCDF4.Dataset(nc_path)
     vars_to_load = ["Time", "PALT", "GGLON", "GGLAT", "THETA", "VMR_VXL", "dD_WVISO1"]
     data = {}
     
     for v in vars_to_load:
         if v in ds.variables:
-            val = ds.variables[v][:n]
+            val = ds.variables[v][start:start+n]
             if hasattr(val, 'filled'):
                 val = val.filled(np.nan)
             if val.ndim == 2:
@@ -37,7 +39,7 @@ if __name__ == "__main__":
     nc_file = "RF02S.20240229.092740_182647.PNI.nc"
     output_csv = "quick_test_output.csv"
     
-    df_test = load_first_n_lines(nc_file, 5)
+    df_test = load_first_n_lines(nc_file)
     
     df_test.to_csv(output_csv, index=False)
     print(f"Results saved to {output_csv}")
