@@ -5,34 +5,20 @@ import matplotlib.pyplot as plt
 nc_file = "RF02S.20240229.092740_182647.PNI.nc"
 ds = netCDF4.Dataset(nc_file)
 
-time_sec = ds.variables["Time"][:]
-palt = ds.variables["PALT"][:]
-theta = ds.variables["THETA"][:]
-vmr = ds.variables["VMR_VXL"][:]
-dD_raw = ds.variables["dD_WVISO1"][:]
+def to_array(var):
+    arr = var[:]
+    return arr.filled(np.nan) if hasattr(arr, "filled") else np.array(arr, dtype=float)
 
-for arr_name in ["palt", "theta", "vmr", "dD_raw"]:
-    arr = locals()[arr_name]
-    if hasattr(arr, "filled"):
-        locals()[arr_name] = arr.filled(np.nan)
-
-palt = locals()["palt"]
-theta = locals()["theta"]
-vmr = locals()["vmr"]
-dD_raw = locals()["dD_raw"]
-
-if dD_raw.ndim == 2:
-    dD = dD_raw[:, 0]
-else:
-    dD = dD_raw
-
-if hasattr(time_sec, "filled"):
-    time_sec = time_sec.filled(np.nan)
+time_sec = to_array(ds.variables["Time"])
+palt = to_array(ds.variables["PALT"])
+theta = to_array(ds.variables["THETA"])
+vmr = to_array(ds.variables["VMR_VXL"])
+dD_raw = to_array(ds.variables["dD_WVISO1"])
 
 ds.close()
 
-# Compute q (g/kg) from VMR_VXL (ppmv)
-q = vmr * (18.0 / 29.0) / 1000.0
+dD = dD_raw[:, 0] if dD_raw.ndim == 2 else dD_raw
+q = vmr * (18.0 / 29.0)
 spiral_mask = (time_sec >= 40414) & (time_sec <= 49099)
 
 alt = palt[spiral_mask]

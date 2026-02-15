@@ -25,7 +25,7 @@ def load_first_n_lines(nc_path, start=4471, n=5):
             data[v] = val
     
     if "VMR_VXL" in data:
-        data["q"] = data["VMR_VXL"] * (18.0 / 29.0) / 1000.0
+        data["q"] = data["VMR_VXL"] * (18.0 / 29.0)
         
     if "Time" in data:
         base_date = datetime(2024, 2, 29) # Fallback date
